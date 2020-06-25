@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node src/transcoding.js"
+  },
   "dependencies": {
-    "node-static": "^0.7.11",
+    "global": "^4.4.0",
     "ws": "^7.2.1"
   }
 }
