@@ -13,14 +13,15 @@ writeStream.on("finish", () => {
 
 wss.on("connection", (ws) => {
   // Initializing ffmpeg pipe connection.
-  const inputWritableStream = initPipe(writeStream);
+  const childProcess = initPipe(writeStream);
 
   ws.on("message", (message) => {
     console.log("saving video with octet stream");
-    inputWritableStream.stdin.write(message);
+    childProcess.stdin.write(message);
   });
+
   ws.send("Hello! Message From Server!!");
-  
+
   ws.on("close", function () {
     writeStream.end();
   });

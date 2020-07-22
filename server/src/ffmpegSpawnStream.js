@@ -91,21 +91,21 @@ function initPipeWithOnlyOuputFilePath(outputFilePath) {
 // file but it can be any writable stream
 // Source is in Transcoding.js
 function initPipe(fileWriteOutStream) {
-  const ffmpegStreamReadableStream = spinSeparateThread();
+  const childProcess = spinSeparateThread();
 
-  if (fileWriteOutStream && ffmpegStreamReadableStream) {
-    ffmpegStreamReadableStream.stdout.on("data", (data) => {
+  if (fileWriteOutStream && childProcess) {
+    childProcess.stdout.on("data", (data) => {
       //   console.log(`child stdout:\n${data}`);
       //   Writes the transcoded output on the fly.
       fileWriteOutStream.write(data);
     });
 
-    ffmpegStreamReadableStream.stderr.on("data", (data) => {
+    childProcess.stderr.on("data", (data) => {
       console.error(`child stderr:\n${data}`);
     });
   }
 
-  return ffmpegStreamReadableStream;
+  return childProcess;
 }
 
 module.exports = {
