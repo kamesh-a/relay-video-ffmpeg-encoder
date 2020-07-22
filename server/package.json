@@ -7,7 +7,6 @@
     "start": "node src/transcoding.js"
   },
   "dependencies": {
-    "global": "^4.4.0",
     "ws": "^7.2.1"
   }
 }
